@@ -2,13 +2,25 @@ DROP DATABASE dreamycloset;
 CREATE DATABASE dreamycloset;
 USE dreamycloset;
 
+CREATE TABLE substyles (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE comms(
+    id INTEGER NOT NULL PRIMARY KEY,
+    comm_name VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE users (
     id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
     username VARCHAR(255) UNIQUE NOT NULL,
     fav_substyle INTEGER,
-    home_comm INTEGER
-    -- FOREIGN KEY(fav_substyle) REFERENCES substyles(id),
-    -- FOREIGN KEY(home_comm) REFERENCES comms(id)
+    home_comm INTEGER,
+    FOREIGN KEY(fav_substyle) REFERENCES substyles(id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(home_comm) REFERENCES comms(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -24,15 +36,6 @@ CREATE TABLE items (
     ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE substyles (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    name VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE comms(
-    id INTEGER NOT NULL PRIMARY KEY,
-    comm_name VARCHAR(255) NOT NULL
-);
 
 CREATE TABLE users_comms (
     user_id INTEGER NOT NULL,
