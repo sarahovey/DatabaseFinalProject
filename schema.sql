@@ -3,7 +3,7 @@ CREATE DATABASE dreamycloset;
 USE dreamycloset;
 
 CREATE TABLE users (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
     username VARCHAR(255) UNIQUE NOT NULL,
     fav_substyle INTEGER,
     home_comm INTEGER
@@ -13,7 +13,7 @@ CREATE TABLE users (
 
 
 CREATE TABLE items (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
     item_type VARCHAR(255) NOT NULL,
     wishlist_wardrobe INTEGER NOT NULL,
     date_added DATE,
@@ -21,30 +21,36 @@ CREATE TABLE items (
     active BOOL NOT NULL,
     date_inactivated DATE,
     FOREIGN KEY(user_id) REFERENCES users(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE substyles (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE comms(
-    id INTEGER NOT NULL,
+    id INTEGER NOT NULL PRIMARY KEY,
     comm_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE users_comms (
     user_id INTEGER NOT NULL,
-    comm_id INTEGER NOT NULL
-    -- FOREIGN KEY(user_id) REFERENCES users(id),
-    -- FOREIGN KEY(comm_id) REFERENCES comms(id),
-    -- PRIMARY KEY(user_id, comm_id)
+    comm_id INTEGER NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(comm_id) REFERENCES comms(id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY(user_id, comm_id)
 );
 
 CREATE TABLE users_substyles (
     user_id INTEGER NOT NULL,
     style_id INTEGER NOT NULL,
-    -- FOREIGN KEY(user_id) REFERENCES users(id),
-    -- FOREIGN KEY(style_id) REFERENCES substyles(id),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(style_id) REFERENCES substyles(id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY(user_id, style_id)
+    
 );
