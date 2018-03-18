@@ -1,4 +1,4 @@
-<h2>List of brands:</h2>
+<h2>List of users:</h2>
 <table class = "table">
     <thead>
         <th>
@@ -7,7 +7,7 @@
     </thead>
     
     <tbody>
-        {{#each brands}}
+        {{#each users}}
         <tr>
           <td></td>
           <td>{{name}}</td>
@@ -20,8 +20,8 @@
 
 <hr>
 {{!--Add  a new brand--}}
-<h3>Add a new brand:</h3>
-<form id="addbrand" action="/brands" method="post">
+<h3>Add a new users:</h3>
+<form id="addbrand" action="/users" method="post">
 <div class="form-group">
  Name: <input type="text" name="name"><br>
 </select><br>

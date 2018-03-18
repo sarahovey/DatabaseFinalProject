@@ -1,16 +1,18 @@
-<h2>List of brands:</h2>
+<h2>List of substyles:</h2>
 <table class = "table">
     <thead>
         <th>
             <td>Name</td>
+            <td>Description</td>
         </th>
     </thead>
     
     <tbody>
-        {{#each brands}}
+        {{#each substyles}}
         <tr>
-          <td></td>
+            <td></td>
           <td>{{name}}</td>
+          <td>{{description}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -20,11 +22,12 @@
 
 <hr>
 {{!--Add  a new brand--}}
-<h3>Add a new brand:</h3>
-<form id="addbrand" action="/brands" method="post">
+<h3>Add a new substyle:</h3>
+<form id="addsubstyle" action="/substyles" method="post">
 <div class="form-group">
  Name: <input type="text" name="name"><br>
-</select><br>
+ Description: <input type="text" name="description"><br>
+<br>
 <input type="submit" value="Submit">
 </div>
 </form>

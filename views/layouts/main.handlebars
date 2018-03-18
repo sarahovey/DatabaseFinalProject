@@ -5,6 +5,8 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">
     {{#each jsscripts}}
     <script src="/static/{{this}}"></script>
     {{/each}}
@@ -15,14 +17,16 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">Dreamy Closet</a>
             </div>
-            <div class="collapse navbar-collapse">
+            {{!--<div class="collapse navbar-collapse">--}}
                 <ul class="navbar-nav navbar-right">
-                    <li><a href="/">Wardrobe</a></li>
-                    <li><a href="/">Brands</a></li>
-                    <li><a href="/">Types</a></li>
+                    <li><a href="/items">Wardrobe</a></li>
+                    <li><a href="/brands">Brands</a></li>
+                    <li><a href="/types">Types</a></li>
+                    <li><a href="/substyles">Substyles</a></li>
+                    <li><a href="/users">Users</a></li>
                 </ul>
                 
-            </div>
+            {{!--</div>--}}
         </div>
     </nav>
     <h1>Dreamy Closet</h1>

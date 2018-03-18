@@ -3,6 +3,7 @@ module.exports = function(){
     var router = express.Router();
     var async = require('async');
     "use strict";
+    
      
     function getItems(mysql, callback){
         var q= "SELECT items.id, item_types.name AS item_type, items.name, "+
