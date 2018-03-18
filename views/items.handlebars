@@ -1,0 +1,116 @@
+<h1>Items in Wardrobe:</h1>
+<table>
+    <thead>
+        <th>
+            <td>Type</td>
+            <td>Name</td>
+            <td>Brand</td>
+            <td>Substyles</td>
+            <td>User</td>
+        </th>
+    </thead>
+    
+    <tbody>
+        {{#each items}}
+        <tr>
+          <td>{{item_type}}</td>  
+          <td>{{name}}</td>
+          <td>{{brand}}</td>
+          <td>{{substyle}}</td>
+          <td>{{user_id}}</td>
+          <td><button onclick="deleteItem({{id}})">Delete</button></td>
+        <td><a href="/items/{{id}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+    
+ 
+</table>
+
+<hr>
+    {{!--New Item--}}
+    <p>Add a new Item</p>
+    <form id="additem" action="/items" method="post">
+    Type <select name="type"> 
+        {{#each types}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
+     Name: <input type="text" name="name"><br>
+     Brand <select name="brand"> 
+        {{#each brands}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
+    Substyle <select name="substyle"> 
+        {{#each substyles}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
+    User <select name="user"> 
+        {{#each users}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
+    <input type="submit" value="Submit">
+    </form>
+    
+    {{!--Add  a new brand--}}
+    <p>Add a new brand</p>
+    <form id="addbrand" action="/brands" method="post">
+     Name: <input type="text" name="name"><br>
+    </select><br>
+    <input type="submit" value="Submit">
+    </form>
+    
+    <p>Add a new substyle</p>
+     <form id="addsubstyle" action="/substyles" method="post">
+     Name: <input type="text" name="name"><br>
+    </select><br>
+    <input type="submit" value="Submit">
+    </form>
+    
+    <p>Add a new item type</p>
+     <form id="addstype" action="/types" method="post">
+     Name: <input type="text" name="name"><br>
+    </select><br>
+    <input type="submit" value="Submit">
+    </form>
+<table>
+    <thead>
+        <th>
+            <td>brand</td>
+        </th>
+    </thead>
+    <tbody>
+        {{#each brands}}
+        <tr>{{name}}</tr>
+        {{/each}}
+    </tbody>
+</table>    
+    
+<table>
+    <thead>
+        <th>
+            <td>Substyles</td>
+        </th>
+    </thead>
+    <tbody>
+        {{#each substyles}}
+        <tr>{{name}}</tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <th>
+            <td>Types</td>
+        </th>
+    </thead>
+    <tbody>
+        {{#each types}}
+        <tr>{{name}}</tr>
+        {{/each}}
+    </tbody>
+</table>

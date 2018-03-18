@@ -1,15 +1,9 @@
 var mysql = require('mysql');
-
-//Move this to its own file soon, use dbconn from Flip for final
-var conn = mysql.createConnection({
-   host: "localhost" ,
+var pool = mysql.createPool({
+   host: "localhost",
+   port: "3306",
    user: "sarahovey",
-   password: "340DreamyCloset"
+   database: "dreamycloset"
+   
 });
-
-conn.connect(function(err){
-   if(err){
-       console.log(err);
-   } 
-   console.log("Connected!");
-});
+module.exports.pool = pool;

@@ -1,0 +1,20 @@
+<h1>Items in Wardrobe:</h1>
+<table>
+    <thead>
+        <th>
+            <td>Name</td>
+        </th>
+    </thead>
+    
+    <tbody>
+        {{#each brands}}
+        <tr>
+          <td>{{name}}</td>
+          <td><button onclick="deleteBrand({{id}})">Delete</button></td>
+        <td><a href="/items/{{id}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+    
+ 
+</table>

@@ -1,0 +1,3 @@
+Update main query to include substyles 
+
+find checkbox for substyles on update and new

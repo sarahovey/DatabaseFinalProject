@@ -1,18 +1,42 @@
-var express = require('express');
-var mysql = require('mysql');
-var app = express();
+var express    = require('express');
+var mysql      = require('./dbcon.js');
+var app        = express();
+var bodyParser = require('body-parser');
+var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
-//Move this to its own file soon, use dbconn from Flip for final
-var conn = mysql.createConnection({
-   host: "localhost" ,
-   user: "sarahovey",
-   password: "340DreamyCloset",
-   database:""
+app.engine('handlebars', handlebars.engine);
+app.use(bodyParser.urlencoded({extended:true}));
+app.use('/static', express.static('public'));
+app.set('view engine', 'handlebars');
+//app.set('port', process.argv[2]);
+app.set('mysql', mysql);
+// app.use((err, req, res, next){
+//   res.sendStatus(err, httpStatusCode).json.stringify(err);
+// })
+
+app.use('/items', require('./items.js'));
+
+app.get('/', function(req,res,next){
+  res.redirect("/items");
 });
 
-conn.connect(function(err){
-   if(err){
-       console.log(err);
-   } 
-   console.log("Connected!");
+app.use(function(req,res){
+  res.status(404);
+  res.render('404');
 });
+
+app.use(function(err, req, res, next){
+  console.error(err.stack);
+  res.status(500);
+  res.render('500');
+});
+
+//Listener
+// app.listen(8080, function(){
+//     console.log("Server running on 8080!");
+// });
+
+//listener for C9 env
+app.listen(process.env.PORT, process.env.IP, function(){
+    console.log("server is listening....");
+})

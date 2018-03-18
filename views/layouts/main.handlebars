@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
+    {{#each jsscripts}}
+    <script src="/static/{{this}}"></script>
+    {{/each}}
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Dreamy Closet</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav navbar-right">
+                    <li><a href="/">Wardrobe</a></li>
+                    <li><a href="/">Brands</a></li>
+                    <li><a href="/">Types</a></li>
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+    <h1>Dreamy Closet</h1>
+    <hr>
+	{{{body}}}
+</body>
+</html>
