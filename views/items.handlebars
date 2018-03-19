@@ -1,6 +1,8 @@
-<h1>Items in Wardrobe:</h1>
-
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+{{#each jsscripts}}
+    <script src="/static/{{this}}"></script>
+    {{/each}}
+    
+<h2>Items in Wardrobe:</h2>
 
 <table class="table" id="itemstable">
     <thead>
@@ -52,6 +54,11 @@
         <option value="{{id}}">{{name}}</option>
         {{/each}}
     </select><br>
+    User <select name="user"> 
+        {{#each users}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br>
     <input type="submit" value="Submit">
     </div>
     </form>
@@ -60,7 +67,14 @@
     
     
 <script>
-$(document).ready( function () {
-    $('#myTable').DataTable();
-} );
+function deleteItem(id){
+    $.ajax({
+        url: '/items/' + id,
+        type: 'DELETE',
+        success: function(result){
+            window.location.reload(true);
+        }
+    })
+};
+
 </script>

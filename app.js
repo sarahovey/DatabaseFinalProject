@@ -3,7 +3,7 @@ var mysql      = require('./dbcon.js');
 var app        = express();
 var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-// var $          = require( 'jquery' );
+var $          = require( 'jquery' );
 // var dt         = require( 'datatables.net' )();
 
 app.engine('handlebars', handlebars.engine);

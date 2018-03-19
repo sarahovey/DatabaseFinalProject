@@ -1,3 +1,4 @@
+var $  = require( 'jquery' );
 function updateItem(id){
     $.ajax({
         url: '/items/' + id,
@@ -8,3 +9,7 @@ function updateItem(id){
         }
     })
 };
+
+// {{!--<script defer>selectType({{item.item_type}});</script>--}}
+// {{!--<script defer>selectBrand({{item.brand}});</script>--}}
+// {{!--<script defer>selectSubstyle({{item.substyle}});</script>--}}

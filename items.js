@@ -35,15 +35,17 @@ module.exports = function(){
         "INNER JOIN brands ON brand = brands.id  "+
         "JOIN items_substyles ON(items.substyle = items_substyles.item_id) "+ 
         "JOIN substyles ON (items_substyles.style_id = substyles.id) "+
-        "INNER JOIN users ON users.id = items.user_id WHERE id =" + id;
+        "INNER JOIN users ON users.id = items.user_id WHERE items.id = ?";
         
-       mysql.pool.query(q, function(err, results){
+        var inserts = [id];
+        
+        mysql.pool.query(q, inserts, function(err, results){
              if(err){
                 console.log(err);
                 return callback(err);
             }
             else{
-            callback(null, results);
+            callback(null, results[0]);
             }
         });
     }
@@ -86,7 +88,7 @@ module.exports = function(){
     // Display all items when the page loads
     router.get('/', function(req,res){
         var context = {};
-        context.jsscripts=["deleteItem.js"];
+        context.jsscripts=["./deleteItem.js"];
         var mysql = req.app.get('mysql');
         
          async.parallel({
@@ -106,17 +108,14 @@ module.exports = function(){
         
         
      });
-    
-    //Everything from here is only called when buttons are clicked 
-    
     //Display 1 item for the sake of updating it
     router.get('/:id', function(req, res){
         var context = {};
-        context.jsscripts = ["selectedUser.js", "selectedType.js", "selectedBrand.js", "selectedSubstyle.js", "updateItem.js"];
+        context.jsscripts = ["selectType.js", "selectBrand.js", "selectSubstyle.js", "selectUser.js", "updateItem.js"];
         var mysql = req.app.get('mysql');
         
         async.parallel({
-            item: (err, cb) => getItem(req.params.id, err, cb),
+            item: (err, cb) => getItem(mysql, req.params.id, err, cb),
             types: (err, cb) => getTypes(mysql, err, cb),
             users: (err, cb) => getUsers(mysql, err, cb),
             brands: (err, cb) => getBrands(mysql, err, cb),
@@ -147,56 +146,11 @@ module.exports = function(){
         });
     });
     
-    //Add a new brand
-     router.post('/brands', function(req, res){
-        var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO brands (name) VALUES (?)";
-        var inserts = [req.body.name];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }else{
-                res.redirect('/items');
-            }
-        });
-    });
-    
-    //Add a new type
-    router.post('/', function(req, res){
-        var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO item_types (name) VALUES (?)";
-        var inserts = [req.body.name];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }else{
-                res.redirect('/items');
-            }
-        });
-    });
-    
-    //Add a new substyle
-    router.post('/', function(req, res){
-        var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO substyles (name) VALUES (?)";
-        var inserts = [req.body.name];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }else{
-                res.redirect('/items');
-            }
-        });
-    });
-    
     //URI for update data
      router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE items SET type=?, name=?, brand=?, substyle=? WHERE id=?";
-        var inserts = [req.body.type, req.body.name, req.body.brand, req.body.substyles];
+        var sql = "UPDATE items SET item_type=?, name=?, brand=?, substyle=? user_id=? WHERE id=?";
+        var inserts = [req.body.item_type, req.body.name, req.body.brand, req.body.substyle, req.body.user_id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));

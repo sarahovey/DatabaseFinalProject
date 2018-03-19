@@ -1,3 +1,4 @@
+var $  = require( 'jquery' );
 function deleteItem(id){
     $.ajax({
         url: '/items/' + id,
