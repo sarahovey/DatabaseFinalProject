@@ -3,6 +3,12 @@
     {{/each}}
     
 <h2>Items in Wardrobe:</h2>
+<p>Filter by brand</p>
+<select name="brandfilter" onchange="brandfilter()"> 
+    {{#each brands}}
+    <option value="{{id}}">{{name}}</option>
+    {{/each}}
+</select><br>
 
 <table class="table" id="itemstable">
     <thead>
@@ -62,9 +68,6 @@
     <input type="submit" value="Submit">
     </div>
     </form>
-    
-
-    
     
 <script>
 function deleteItem(id){

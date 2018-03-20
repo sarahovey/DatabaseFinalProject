@@ -19,14 +19,13 @@
 </form>
 <button onclick="updateItem({{item.id}})">Update</button>
 
-{{#each jsscripts}}
-    <script src="/static/{{this}}"></script>
-    {{/each}}
+    
 <script>
+
 function updateItem(id){
     $.ajax({
         url: '/items/' + id,
-        type: 'PUT',
+        type: 'POST',
         data: $('#update-item').serialize(),
         success: function(result){
             window.location.replace("./");
@@ -36,25 +35,8 @@ function updateItem(id){
 </script>
 
 <script>
-    function selectBrand(id){
-    $("#brand-selector").val(id);
-}
-</script>
-
-<script>
-function selectUser(id){
-    $("#user-selector").val(id);
-}
-</script>
-
-<script>
-  function selectSubstyle(id){
-    $("#substyle-selector").val(id);
-}  
-</script>
-
-<script>
-    function selectType(id){
-    $("#type-selector").val(id);
-}
+    $("#brand-selector").val({{item.brand}});
+    $("#substyle-selector").val({{item.substyle}});
+    $("#type-selector").val({{item.type}});
+    
 </script>

@@ -22,6 +22,7 @@ app.use('/brands', require('./brands.js'));
 app.use('/types', require('./types.js'));
 app.use('/substyles', require('./substyles.js'));
 app.use('/users', require('./users.js'));
+// app.use('/home', require('./home.js'));
 
 app.get('/', function(req,res,next){
   res.redirect("/items");

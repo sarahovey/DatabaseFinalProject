@@ -85,6 +85,7 @@ module.exports = function(){
             callback(null, results);
         });
     }
+    
     // Display all items when the page loads
     router.get('/', function(req,res){
         var context = {};
@@ -105,9 +106,8 @@ module.exports = function(){
         res.render('items', context);
            
       });
-        
-        
      });
+    
     //Display 1 item for the sake of updating it
     router.get('/:id', function(req, res){
         var context = {};
@@ -147,7 +147,7 @@ module.exports = function(){
     });
     
     //URI for update data
-     router.put('/:id', function(req, res){
+    router.post('/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE items SET item_type=?, name=?, brand=?, substyle=? user_id=? WHERE id=?";
         var inserts = [req.body.item_type, req.body.name, req.body.brand, req.body.substyle, req.body.user_id];

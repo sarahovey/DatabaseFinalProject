@@ -26,11 +26,11 @@ CREATE TABLE brands (
 
 CREATE TABLE items (
     id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    item_type INTEGER NOT NULL,
+    item_type INTEGER,
     name VARCHAR(255) NOT NULL,
-    brand INTEGER NOT NULL,
-    substyle INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
+    brand INTEGER, 
+    substyle INTEGER,
+    user_id INTEGER,
     FOREIGN KEY(item_type) REFERENCES item_types(id)
     ON DELETE CASCADE,
     FOREIGN KEY(brand) REFERENCES brands(id)
